@@ -1,16 +1,13 @@
-# -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import ttk, messagebox
 import traceback
 
-# Versuche python-osc zu laden, um ein direktes Schließen bei fehlendem Paket zu verhindern
 try:
     from pythonosc import udp_client
     OSC_AVAILABLE = True
 except ImportError:
     OSC_AVAILABLE = False
 
-# Dictionary mit allen Kategorien und Kaomojis aus deiner Sammlung[cite: 1]
 KAOMOJI_DATA = {
     "Cute / Classic": [
         "(,,>﹏<,,)", "(,,> ᴗ <,,)", "(,,>ω<,,)", "(,,>///<,,)", "(,,•﹏•,,)",
@@ -157,7 +154,6 @@ KAOMOJI_DATA = {
     ]
 }
 
-# Farben für das Lila Dark Theme
 BG_DARK = "#181524"
 PANEL_BG = "#221d33"
 TEXT_LIGHT = "#e2def0"
@@ -167,7 +163,7 @@ BTN_BG = "#2f2847"
 class VRChatKaomojiSenderApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("VRChat Kaomoji OSC Sender - Lila Dark Edition")
+        self.root.title("VRChat Kaomoji OSC")
         self.root.geometry("800x600")
         self.root.minsize(650, 500)
         self.root.configure(bg=BG_DARK)
@@ -232,7 +228,7 @@ class VRChatKaomojiSenderApp:
         top_container = ttk.Frame(self.root)
         top_container.pack(fill="x", padx=15, pady=15)
 
-        # OSC Verbindungs-Frame
+       
         conn_frame = ttk.LabelFrame(top_container, text="OSC Verbindung", padding=10)
         conn_frame.pack(side="left", fill="y", padx=(0, 10))
 
@@ -244,7 +240,7 @@ class VRChatKaomojiSenderApp:
 
         ttk.Button(conn_frame, text="Anwenden", command=self.update_osc_client).pack(side="left")
 
-        # Live Suchfeld-Frame
+     
         search_frame = ttk.LabelFrame(top_container, text="Live-Suche", padding=10)
         search_frame.pack(side="right", fill="both", expand=True)
 
@@ -253,11 +249,11 @@ class VRChatKaomojiSenderApp:
         search_entry = ttk.Entry(search_frame, textvariable=self.search_var)
         search_entry.pack(fill="x", expand=True)
 
-        # Katalog Menü & Anzeige Bereich
+      
         catalog_container = ttk.LabelFrame(self.root, text="Kaomoji Katalog Menü", padding=12)
         catalog_container.pack(fill="both", expand=True, padx=15, pady=(0, 10))
 
-        # Tiny Dropdown Menu Zeile
+        
         menu_row = ttk.Frame(catalog_container)
         menu_row.pack(fill="x", padx=5, pady=(0, 10))
 
@@ -274,7 +270,7 @@ class VRChatKaomojiSenderApp:
         self.catalog_menu.pack(side="left")
         self.catalog_menu.bind("<<ComboboxSelected>>", self.on_catalog_selected)
 
-        # Scrollbarer Bereich für die Kaomojis
+        
         content_frame = ttk.Frame(catalog_container)
         content_frame.pack(fill="both", expand=True)
 
@@ -295,7 +291,7 @@ class VRChatKaomojiSenderApp:
 
         self.populate_catalog_buttons(self.catalog_var.get())
 
-        # Statusleiste unten
+      
         status_frame = tk.Frame(self.root, bg=PANEL_BG, padx=10, height=35)
         status_frame.pack(fill="x", side="bottom", padx=15, pady=(0, 15))
         status_frame.pack_propagate(False)
